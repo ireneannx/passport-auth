@@ -1,0 +1,14 @@
+<!-- partials contains markups or some kind of html file  that we want to put inside of another template file-->
+
+<!-- check if errors exist -->
+<% if(typeof errors!= 'undefined') {%>
+    <% errors.forEach(function(error){ %>
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <%= error.msg %>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+  <%  }); %>
+<%} %>
+
