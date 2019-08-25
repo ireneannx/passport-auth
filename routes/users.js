@@ -80,19 +80,22 @@ router.post('/register', (req, res) => {
                     //the above section creates an instance. Now we save to mongoDB atlas using newUser.save()
 
                     //Hash password
-                    bcrypt.genSalt(10, (err, salt) => 
-                        bcrypt.hash(newUser.password,salt, (err, hash)=>{ 
-                            if(err) throw err;
+                    bcrypt.genSalt(10, (err, salt) =>
+                        bcrypt.hash(newUser.password, salt, (err, hash) => {
+                            if (err) throw err;
                             //Set password to hashed password
                             newUser.password = hash;
                             //Save user
                             newUser.save() //returns a promise
-                            .then( user => {
-                                res.redirect('/users/login');
-                            })
-                            .catch(err => console.log(err))
+                                .then(user => {
+                                    //create flash message 
+                                    req.flash('success_msg', 'You are now registered and can log in');
 
-                    }))
+                                    res.redirect('/users/login');
+                                })
+                                .catch(err => console.log(err))
+
+                        }))
                 }
             });
     }
